@@ -3,20 +3,20 @@ name: note build
 on:
   push:
     # 只有master分支发生push事件时，才会触发workflow
-    branches: 
+    branches:
       - main
     paths-ignore: # 下列文件的变更不触发部署，可以自行添加
       - README.md
       - LICENSE
   pull_request:
     branches: [main]
-    
+
 
 # jobs表示执行的一项或多项任务
 jobs:
   deploy: # 任务的job_id，具体名称自定义，这里build代表打包
     runs-on: ubuntu-latest # runs-on字段指定运行所需要的虚拟机环境。注意：这个是必填字段
-    steps:
+    steps:e2
       # 切换分支
       # - name: Checkout
       #   uses: actions/checkout@main

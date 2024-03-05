@@ -85,7 +85,7 @@ const show = ref(false);
       ${show ? 'op100' : 'op0!'}`"
     >
       <span
-        :class="`tag mb-3 mr-3 opacity-60 hover:opacity-100 
+        :class="`tag mb-3 mr-3 opacity-60 hover:opacity-100
           ${selectedTag == tag && 'selected'}`"
         v-for="(tag, i) in tags"
         :style="{ backgroundColor: colors[i] }"

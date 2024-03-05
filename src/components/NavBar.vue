@@ -29,30 +29,30 @@ const { y: scroll } = useWindowScroll();
           to="/blog?type=blog"
           :class="$route.name == 'blog' && 'op100!'"
         >
-          <span class="lt-md:hidden">Blog</span>
+          <span class="lt-md:hidden">博客</span>
           <div class="i-carbon-book md:hidden"></div>
         </RouterLink>
         <RouterLink to="/travel" :class="$route.name == 'travel' && 'op100!'">
-          <span class="lt-md:hidden">Travel</span>
+          <span class="lt-md:hidden">旅行地图</span>
           <div class="i-carbon-map md:hidden"></div>
         </RouterLink>
         <RouterLink
           to="/projects"
           :class="$route.name == 'projects' && 'op100!'"
         >
-          <span class="lt-md:hidden">Projects</span>
+          <span class="lt-md:hidden">项目</span>
           <div
             class="i-ant-design-fund-projection-screen-outlined md:hidden"
           ></div>
         </RouterLink>
 
-        <a
-          href="https://github.com/shellingfordly"
-          target="_blank"
-          title="GitHub"
-        >
-          <div class="i-uil-github-alt" />
-        </a>
+<!--        <a-->
+<!--          href="https://github.com/shellingfordly"-->
+<!--          target="_blank"-->
+<!--          title="GitHub"-->
+<!--        >-->
+<!--          <div class="i-uil-github-alt" />-->
+<!--        </a>-->
         <a class="select-none" title="Toggle Color Scheme" @click="toggleDark">
           <div class="i-carbon-sun dark:i-carbon-moon" />
         </a>

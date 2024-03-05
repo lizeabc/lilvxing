@@ -9,6 +9,7 @@ import {
 } from "~/ol-imports";
 import { CreateMapMarkerData } from "~/utils";
 import { START_POINT } from "../config";
+import {log} from "ol/console";
 
 /**
  * @abstract 创建标点图层
@@ -35,7 +36,6 @@ export function CreateMarkerLayer() {
  */
 export function CreatePointFeature(item: MarkerItem) {
   if (!item?.coords) return;
-
   // 创建一个点要素
   const pointFeature = new Feature({
     geometry: new Point(fromLonLat(item.coords)), // 设置点的坐标
