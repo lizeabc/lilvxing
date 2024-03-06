@@ -7,7 +7,7 @@
       >
         CC BY-NC-SA 4.0
       </a>
-      2021-PRESENT © shellingfordly
+      2021-PRESENT © li
     </p>
     <div class="font-size-12px">
       <div class="i-carbon-user mr-1"></div>

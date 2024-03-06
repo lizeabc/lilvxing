@@ -1,14 +1,11 @@
 ---
-title: 匆匆忙忙1111之旅
-date: 2023-08-05 20:00:00
-city: 浙江舟山
+title: 山东菏泽
+date: 2024-3-6 
+city: 山东菏泽
 coords: [115.4667, 35.2333]
-desc: 我十八岁看的海，侄子一岁看海。
+desc: 我的老家。
 preview: /images/travel/zhejiang/zs_preview.jpg
 tags: 
-- 浙江
+- 山东
 ---
-
-这次去舟山真的很匆忙，周六中午过去，到舟山都已经晚上了，和老妈老姐一起吃了个饭，就睡觉了，第二天在海边玩到下午五点，又匆匆忙忙的回杭州了。
-
-小侄子不知不觉都一岁了。我十八岁看的海，小侄子一岁看海，时间真快啊，舅舅要越来越老咯。
+aaaaaaaaaaaaaaaaaaaasdasdasdasdasd
