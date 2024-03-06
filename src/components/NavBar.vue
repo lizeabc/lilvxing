@@ -36,8 +36,9 @@ const { y: scroll } = useWindowScroll();
           <span class="lt-md:hidden">旅行地图</span>
           <div class="i-carbon-map md:hidden"></div>
         </RouterLink>
+
         <RouterLink
-          to="/projects"
+          to="/view/arr"
           :class="$route.name == 'projects' && 'op100!'"
         >
           <span class="lt-md:hidden">项目</span>
