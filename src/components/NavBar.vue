@@ -33,7 +33,7 @@ const { y: scroll } = useWindowScroll();
           <div class="i-carbon-book md:hidden"></div>
         </RouterLink>
         <RouterLink to="/travel" :class="$route.name == 'travel' && 'op100!'">
-          <span class="lt-md:hidden">旅行地图</span>
+          <span class="lt-md:hidden">狐朋狗友</span>
           <div class="i-carbon-map md:hidden"></div>
         </RouterLink>
 
