@@ -26,3 +26,4 @@ components.d.ts
 *.sw?
 
 deploy.sh
+/dist/
