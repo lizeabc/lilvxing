@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/images/icons/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shellingfordly</title>
+  <script type="module" crossorigin="" src="/assets/app-Bm1F-R0U.js"></script>
+  <link rel="stylesheet" crossorigin="" href="/assets/app-C6jmxeqa.css">
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?63732a6b36c58fe45c40026588e0b9f2";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script><link rel="modulepreload" crossorigin="" href="/assets/vue_antd_table_fixed-kCazD2rV.js"></head>
+<!-- <script
+    async
+    src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+  ></script> -->
+
+
+<body class="font-sans text-gray-700 dark:text-gray-200 relative">
+  <div id="app" data-server-rendered="true"><!--[--><header class="header flex z-40 w-full top-0 left-0 relative h-70px" data-v-02c80d99=""><button title="Scroll to top" class="w-10 h-10 op30 hover:op100 rounded-full hover-bg-hex-8883 transition duration-300 z-100 print:hidden fixed right-3 bottom-3 op0! pointer-events-none" data-v-02c80d99=""><div class="i-ri-arrow-up-line"></div></button><div class="flex items-center ml-5 cursor-pointer z-100 sm:w-200px w-150px bg-contain bg-no-repeat bg-center" style="background-image:url(/images/icons/logo.png);" data-v-02c80d99=""></div><nav class="nav" data-v-02c80d99=""><div class="spacer" data-v-02c80d99=""></div><div class="right print:op0" data-v-02c80d99=""><a href="/blog?type=blog" class="" data-v-02c80d99=""><span class="lt-md:hidden" data-v-02c80d99="">博客</span><div class="i-carbon-book md:hidden" data-v-02c80d99=""></div></a><a href="/travel" class="" data-v-02c80d99=""><span class="lt-md:hidden" data-v-02c80d99="">狐朋狗友</span><div class="i-carbon-map md:hidden" data-v-02c80d99=""></div></a><a href="/view/arr" class="" data-v-02c80d99=""><span class="lt-md:hidden" data-v-02c80d99="">项目</span><div class="i-ant-design-fund-projection-screen-outlined md:hidden" data-v-02c80d99=""></div></a><a class="select-none" title="Toggle Color Scheme" data-v-02c80d99=""><div class="i-carbon-sun dark:i-carbon-moon" data-v-02c80d99=""></div></a></div></nav></header><main class="w-full relative of-x-hidden"><div class="flex justify-between pt-8 pb-8 lt-sm:p-30px md:w-80vw lg:w-60vw m-a"><a href="#" class="button hvr-grow"><div class="i-carbon-arrow-left mr-2"></div><span>Back</span></a><div class="font-size-12px op-60"><span class="mr-1">2021/04/16</span><div class="i-carbon-view mr-1"></div><span id="busuanzi_value_page_pv">0</span></div></div><div class="prose m-auto slide-enter-content"><h2 id="antd-vue-table-滚动页面固定表头" tabindex="-1">antd vue table 滚动页面固定表头 <a class="header-anchor" href="#antd-vue-table-滚动页面固定表头" aria-hidden="true">#</a></h2><h3 id="思路" tabindex="-1">思路 <a class="header-anchor" href="#思路" aria-hidden="true">#</a></h3><p>由于直接去控制 antd table 的头部置顶会导致头部样式丢失，每列去获取宽度设置感觉太麻烦，最后决定使用两个 table，一个只做表头固定使用，不赋予数据。 具体做法时，将传入的属于都付给两个 table，隐藏表头 table 的内容部分，当滚动页面超过内容 table 时，显示表头 table。</p><h3 id="template" tabindex="-1">template <a class="header-anchor" href="#template" aria-hidden="true">#</a></h3><ul><li>:data-source=“[]” 表头 table 的数据为空</li><li>v-loading=“false” 避免出现两个 loading</li></ul><pre class="shiki shiki-themes vitesse-dark vitesse-light" style="--s-dark:#dbd7caee;--s-light:#393a34;--s-dark-bg:#121212;--s-light-bg:#ffffff;" tabindex="0"><code class="language-"><span class="line"><span>&lt;template&gt;</span></span>
+<span class="line"><span>  &lt;div style="overflow: hidden"&gt;</span></span>
+<span class="line"><span>    &lt;div class="w1-table-fixed"&gt;</span></span>
+<span class="line"><span>      &lt;a-table</span></span>
+<span class="line"><span>        v-show="isShowHead"</span></span>
+<span class="line"><span>        v-bind="$attrs"</span></span>
+<span class="line"><span>        :data-source="[]"</span></span>
+<span class="line"><span>        v-loading="false"</span></span>
+<span class="line"><span>      &gt;</span></span>
+<span class="line"><span>        &lt;template #[item]="data" v-for="item in Object.keys($slots)"&gt;</span></span>
+<span class="line"><span>          &lt;slot :name="item" v-bind="data" /&gt;</span></span>
+<span class="line"><span>        &lt;/template&gt;</span></span>
+<span class="line"><span>      &lt;/a-table&gt;</span></span>
+<span class="line"><span>    &lt;/div&gt;</span></span>
+<span class="line"><span>    &lt;a-table</span></span>
+<span class="line"><span>      class="w1-table"</span></span>
+<span class="line"><span>      ref="tableRef"</span></span>
+<span class="line"><span>      v-bind="$attrs"</span></span>
+<span class="line"><span>    &gt;</span></span>
+<span class="line"><span>      &lt;template #[item]="data" v-for="item in Object.keys($slots)"&gt;</span></span>
+<span class="line"><span>        &lt;slot :name="item" v-bind="data" /&gt;</span></span>
+<span class="line"><span>      &lt;/template&gt;</span></span>
+<span class="line"><span>    &lt;/a-table&gt;</span></span>
+<span class="line"><span>  &lt;/div&gt;</span></span>
+<span class="line"><span>&lt;/template&gt;</span></span></code></pre><h3 id="js-代码" tabindex="-1">js 代码 <a class="header-anchor" href="#js-代码" aria-hidden="true">#</a></h3><pre class="shiki shiki-themes vitesse-dark vitesse-light" style="--s-dark:#dbd7caee;--s-light:#393a34;--s-dark-bg:#121212;--s-light-bg:#ffffff;" tabindex="0"><code class="language-js"><span class="line"><span style="--s-dark:#4D9375;--s-light:#1E754F;">import</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">  defineComponent</span><span style="--s-dark:#666666;--s-light:#999999;">,</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">  nextTick</span><span style="--s-dark:#666666;--s-light:#999999;">,</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">  onMounted</span><span style="--s-dark:#666666;--s-light:#999999;">,</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">  onUnmounted</span><span style="--s-dark:#666666;--s-light:#999999;">,</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">  PropType</span><span style="--s-dark:#666666;--s-light:#999999;">,</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">  reactive</span><span style="--s-dark:#666666;--s-light:#999999;">,</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">  ref</span><span style="--s-dark:#666666;--s-light:#999999;">,</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">  unref</span><span style="--s-dark:#666666;--s-light:#999999;">,</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">}</span><span style="--s-dark:#4D9375;--s-light:#1E754F;"> from</span><span style="--s-dark:#C98A7D99;--s-light:#B5695999;"> "</span><span style="--s-dark:#C98A7D;--s-light:#B56959;">vue</span><span style="--s-dark:#C98A7D99;--s-light:#B5695999;">"</span><span style="--s-dark:#666666;--s-light:#999999;">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--s-dark:#4D9375;--s-light:#1E754F;">export</span><span style="--s-dark:#4D9375;--s-light:#1E754F;"> default</span><span style="--s-dark:#80A665;--s-light:#59873A;"> defineComponent</span><span style="--s-dark:#666666;--s-light:#999999;">({</span></span>
+<span class="line"><span style="--s-dark:#80A665;--s-light:#59873A;">  setup</span><span style="--s-dark:#666666;--s-light:#999999;">()</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#CB7676;--s-light:#AB5959;">    const</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> tableRef</span><span style="--s-dark:#666666;--s-light:#999999;"> =</span><span style="--s-dark:#80A665;--s-light:#59873A;"> ref</span><span style="--s-dark:#666666;--s-light:#999999;">();</span></span>
+<span class="line"><span style="--s-dark:#CB7676;--s-light:#AB5959;">    const</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> isShowHead</span><span style="--s-dark:#666666;--s-light:#999999;"> =</span><span style="--s-dark:#80A665;--s-light:#59873A;"> ref</span><span style="--s-dark:#666666;--s-light:#999999;">(</span><span style="--s-dark:#4D9375;--s-light:#1E754F;">false</span><span style="--s-dark:#666666;--s-light:#999999;">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="--s-dark:#CB7676;--s-light:#AB5959;">    function</span><span style="--s-dark:#80A665;--s-light:#59873A;"> scrollLeft</span><span style="--s-dark:#666666;--s-light:#999999;">()</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#CB7676;--s-light:#AB5959;">      const</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> el</span><span style="--s-dark:#666666;--s-light:#999999;"> =</span><span style="--s-dark:#80A665;--s-light:#59873A;"> unref</span><span style="--s-dark:#666666;--s-light:#999999;">(</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">tableRef</span><span style="--s-dark:#666666;--s-light:#999999;">);</span></span>
+<span class="line"><span style="--s-dark:#CB7676;--s-light:#AB5959;">      const</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> tableBody</span><span style="--s-dark:#666666;--s-light:#999999;"> =</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> document</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#80A665;--s-light:#59873A;">getElementsByClassName</span><span style="--s-dark:#666666;--s-light:#999999;">(</span><span style="--s-dark:#C98A7D99;--s-light:#B5695999;">"</span><span style="--s-dark:#C98A7D;--s-light:#B56959;">ant-table-body</span><span style="--s-dark:#C98A7D99;--s-light:#B5695999;">"</span><span style="--s-dark:#666666;--s-light:#999999;">)[</span><span style="--s-dark:#4C9A91;--s-light:#2F798A;">1</span><span style="--s-dark:#666666;--s-light:#999999;">];</span></span>
+<span class="line"><span style="--s-dark:#CB7676;--s-light:#AB5959;">      const</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> fixedTableBody</span><span style="--s-dark:#666666;--s-light:#999999;"> =</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> document</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#80A665;--s-light:#59873A;">getElementsByClassName</span><span style="--s-dark:#666666;--s-light:#999999;">(</span></span>
+<span class="line"><span style="--s-dark:#C98A7D99;--s-light:#B5695999;">        "</span><span style="--s-dark:#C98A7D;--s-light:#B56959;">ant-table-body</span><span style="--s-dark:#C98A7D99;--s-light:#B5695999;">"</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">      )[</span><span style="--s-dark:#4C9A91;--s-light:#2F798A;">0</span><span style="--s-dark:#666666;--s-light:#999999;">];</span></span>
+<span class="line"></span>
+<span class="line"><span style="--s-dark:#758575DD;--s-light:#A0ADA0;">      // 实现内容table和头部table的滚动联动</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">      tableBody</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#80A665;--s-light:#59873A;">addEventListener</span><span style="--s-dark:#666666;--s-light:#999999;">(</span><span style="--s-dark:#C98A7D99;--s-light:#B5695999;">"</span><span style="--s-dark:#C98A7D;--s-light:#B56959;">scroll</span><span style="--s-dark:#C98A7D99;--s-light:#B5695999;">"</span><span style="--s-dark:#666666;--s-light:#999999;">,</span><span style="--s-dark:#666666;--s-light:#999999;"> ()</span><span style="--s-dark:#666666;--s-light:#999999;"> =&gt;</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">        fixedTableBody</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">scrollLeft</span><span style="--s-dark:#666666;--s-light:#999999;"> =</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> tableBody</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">scrollLeft</span><span style="--s-dark:#666666;--s-light:#999999;">;</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">      });</span></span>
+<span class="line"></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">      fixedTableBody</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#80A665;--s-light:#59873A;">addEventListener</span><span style="--s-dark:#666666;--s-light:#999999;">(</span><span style="--s-dark:#C98A7D99;--s-light:#B5695999;">"</span><span style="--s-dark:#C98A7D;--s-light:#B56959;">scroll</span><span style="--s-dark:#C98A7D99;--s-light:#B5695999;">"</span><span style="--s-dark:#666666;--s-light:#999999;">,</span><span style="--s-dark:#666666;--s-light:#999999;"> ()</span><span style="--s-dark:#666666;--s-light:#999999;"> =&gt;</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">        tableBody</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">scrollLeft</span><span style="--s-dark:#666666;--s-light:#999999;"> =</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> fixedTableBody</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">scrollLeft</span><span style="--s-dark:#666666;--s-light:#999999;">;</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">      });</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="--s-dark:#CB7676;--s-light:#AB5959;">    function</span><span style="--s-dark:#80A665;--s-light:#59873A;"> srollListener</span><span style="--s-dark:#666666;--s-light:#999999;">()</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#CB7676;--s-light:#AB5959;">      const</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> el</span><span style="--s-dark:#666666;--s-light:#999999;"> =</span><span style="--s-dark:#80A665;--s-light:#59873A;"> unref</span><span style="--s-dark:#666666;--s-light:#999999;">(</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">tableRef</span><span style="--s-dark:#666666;--s-light:#999999;">);</span></span>
+<span class="line"><span style="--s-dark:#CB7676;--s-light:#AB5959;">      const</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> scrollTop</span><span style="--s-dark:#666666;--s-light:#999999;"> =</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">        window</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">pageYOffset</span><span style="--s-dark:#CB7676;--s-light:#AB5959;"> ||</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">        document</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">documentElement</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">scrollTop</span><span style="--s-dark:#CB7676;--s-light:#AB5959;"> ||</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">        document</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">body</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">scrollTop</span><span style="--s-dark:#666666;--s-light:#999999;">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--s-dark:#758575DD;--s-light:#A0ADA0;">      // 滚动大于table到页面顶部高度时，显示固定table头部</span></span>
+<span class="line"><span style="--s-dark:#4D9375;--s-light:#1E754F;">      if</span><span style="--s-dark:#666666;--s-light:#999999;"> (</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">scrollTop</span><span style="--s-dark:#666666;--s-light:#999999;"> &gt;</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> el</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">$el</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">offsetTop</span><span style="--s-dark:#666666;--s-light:#999999;">)</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">        isShowHead</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">value</span><span style="--s-dark:#666666;--s-light:#999999;"> =</span><span style="--s-dark:#4D9375;--s-light:#1E754F;"> true</span><span style="--s-dark:#666666;--s-light:#999999;">;</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">      }</span><span style="--s-dark:#4D9375;--s-light:#1E754F;"> else</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">        isShowHead</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">value</span><span style="--s-dark:#666666;--s-light:#999999;"> =</span><span style="--s-dark:#4D9375;--s-light:#1E754F;"> false</span><span style="--s-dark:#666666;--s-light:#999999;">;</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">      }</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="--s-dark:#80A665;--s-light:#59873A;">    onMounted</span><span style="--s-dark:#666666;--s-light:#999999;">(</span><span style="--s-dark:#CB7676;--s-light:#AB5959;">async</span><span style="--s-dark:#666666;--s-light:#999999;"> ()</span><span style="--s-dark:#666666;--s-light:#999999;"> =&gt;</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#CB7676;--s-light:#AB5959;">      const</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> el</span><span style="--s-dark:#666666;--s-light:#999999;"> =</span><span style="--s-dark:#80A665;--s-light:#59873A;"> unref</span><span style="--s-dark:#666666;--s-light:#999999;">(</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">tableRef</span><span style="--s-dark:#666666;--s-light:#999999;">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="--s-dark:#758575DD;--s-light:#A0ADA0;">      // 确保table已经创建成功</span></span>
+<span class="line"><span style="--s-dark:#4D9375;--s-light:#1E754F;">      if</span><span style="--s-dark:#666666;--s-light:#999999;"> (</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">el</span><span style="--s-dark:#666666;--s-light:#999999;">)</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#4D9375;--s-light:#1E754F;">        await</span><span style="--s-dark:#80A665;--s-light:#59873A;"> nextTick</span><span style="--s-dark:#666666;--s-light:#999999;">();</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">        window</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#80A665;--s-light:#59873A;">addEventListener</span><span style="--s-dark:#666666;--s-light:#999999;">(</span><span style="--s-dark:#C98A7D99;--s-light:#B5695999;">"</span><span style="--s-dark:#C98A7D;--s-light:#B56959;">scroll</span><span style="--s-dark:#C98A7D99;--s-light:#B5695999;">"</span><span style="--s-dark:#666666;--s-light:#999999;">,</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> scrollListener</span><span style="--s-dark:#666666;--s-light:#999999;">,</span><span style="--s-dark:#4D9375;--s-light:#1E754F;"> true</span><span style="--s-dark:#666666;--s-light:#999999;">);</span></span>
+<span class="line"><span style="--s-dark:#80A665;--s-light:#59873A;">        scrollLeft</span><span style="--s-dark:#666666;--s-light:#999999;">();</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">      }</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">    });</span></span>
+<span class="line"></span>
+<span class="line"><span style="--s-dark:#80A665;--s-light:#59873A;">    onUnmounted</span><span style="--s-dark:#666666;--s-light:#999999;">(()</span><span style="--s-dark:#666666;--s-light:#999999;"> =&gt;</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">      window</span><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#80A665;--s-light:#59873A;">removeEventListener</span><span style="--s-dark:#666666;--s-light:#999999;">(</span><span style="--s-dark:#C98A7D99;--s-light:#B5695999;">"</span><span style="--s-dark:#C98A7D;--s-light:#B56959;">scroll</span><span style="--s-dark:#C98A7D99;--s-light:#B5695999;">"</span><span style="--s-dark:#666666;--s-light:#999999;">,</span><span style="--s-dark:#BD976A;--s-light:#B07D48;"> scrollListener</span><span style="--s-dark:#666666;--s-light:#999999;">,</span><span style="--s-dark:#4D9375;--s-light:#1E754F;"> true</span><span style="--s-dark:#666666;--s-light:#999999;">);</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">    });</span></span>
+<span class="line"></span>
+<span class="line"><span style="--s-dark:#4D9375;--s-light:#1E754F;">    return</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">      tableRef</span><span style="--s-dark:#666666;--s-light:#999999;">,</span></span>
+<span class="line"><span style="--s-dark:#BD976A;--s-light:#B07D48;">      isShowHead</span><span style="--s-dark:#666666;--s-light:#999999;">,</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">    };</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">  },</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">});</span></span></code></pre><p>css 样式</p><pre class="shiki shiki-themes vitesse-dark vitesse-light" style="--s-dark:#dbd7caee;--s-light:#393a34;--s-dark-bg:#121212;--s-light-bg:#ffffff;" tabindex="0"><code class="language-less"><span class="line"><span style="--s-dark:#666666;--s-light:#999999;">.</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">w1-table-fixed</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#B8A965;--s-light:#998418;">  position</span><span style="--s-dark:#666666;--s-light:#999999;">:</span><span style="--s-dark:#C99076;--s-light:#A65E2B;"> fixed</span><span style="--s-dark:#666666;--s-light:#999999;">;</span></span>
+<span class="line"><span style="--s-dark:#B8A965;--s-light:#998418;">  top</span><span style="--s-dark:#666666;--s-light:#999999;">:</span><span style="--s-dark:#4C9A91;--s-light:#2F798A;"> 0</span><span style="--s-dark:#666666;--s-light:#999999;">;</span></span>
+<span class="line"><span style="--s-dark:#B8A965;--s-light:#998418;">  z-index</span><span style="--s-dark:#666666;--s-light:#999999;">:</span><span style="--s-dark:#4C9A91;--s-light:#2F798A;"> 999</span><span style="--s-dark:#666666;--s-light:#999999;">;</span></span>
+<span class="line"><span style="--s-dark:#B8A965;--s-light:#998418;">  overflow</span><span style="--s-dark:#666666;--s-light:#999999;">:</span><span style="--s-dark:#C99076;--s-light:#A65E2B;"> hidden</span><span style="--s-dark:#666666;--s-light:#999999;">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">  .</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">ant-table-body</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#758575DD;--s-light:#A0ADA0;">    // 隐藏滚动条</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">    &amp;::</span><span style="--s-dark:#B8A965;--s-light:#998418;">-webkit-</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">scrollbar</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#B8A965;--s-light:#998418;">      display</span><span style="--s-dark:#666666;--s-light:#999999;">:</span><span style="--s-dark:#C99076;--s-light:#A65E2B;"> none</span><span style="--s-dark:#666666;--s-light:#999999;">;</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">    }</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">  .</span><span style="--s-dark:#BD976A;--s-light:#B07D48;">ant-table-placeholder</span><span style="--s-dark:#666666;--s-light:#999999;"> {</span></span>
+<span class="line"><span style="--s-dark:#758575DD;--s-light:#A0ADA0;">    // 隐藏头部table的内容</span></span>
+<span class="line"><span style="--s-dark:#B8A965;--s-light:#998418;">    display</span><span style="--s-dark:#666666;--s-light:#999999;">:</span><span style="--s-dark:#C99076;--s-light:#A65E2B;"> none</span><span style="--s-dark:#666666;--s-light:#999999;"> !</span><span style="--s-dark:#4D9375;--s-light:#1E754F;">important</span><span style="--s-dark:#666666;--s-light:#999999;">;</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">  }</span></span>
+<span class="line"><span style="--s-dark:#666666;--s-light:#999999;">}</span></span></code></pre><h3 id="问题" tabindex="-1">问题 <a class="header-anchor" href="#问题" aria-hidden="true">#</a></h3><p>不过这个方式就是在显示表头 table 的时候会有卡顿感，如果有好的优化方式可以评论告诉我</p></div><div class="text-center p-2 pt-15 pb-10 op50"><p class="font-size-12px"><a class="underline" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"> CC BY-NC-SA 4.0 </a> 2021-PRESENT © li </p><div class="font-size-12px"><div class="i-carbon-user mr-1"></div><span id="busuanzi_value_site_uv" class="mr-3">0</span><div class="i-carbon-view mr-1"></div><span id="busuanzi_value_site_pv">0</span></div></div></main><!----><!--]--></div>
+
+
+
+</body></html>

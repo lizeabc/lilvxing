@@ -1,0 +1,2 @@
+import{c as t,o,a as e,b as s}from"./app-Bm1F-R0U.js";const a={class:"prose m-auto slide-enter-content"},n=e("br",null,null,-1),c=e("h1",{id:"_404",tabindex:"-1"},[s("404 "),e("a",{class:"header-anchor",href:"#_404","aria-hidden":"true"},"#")],-1),r=e("p",null,[e("strong",null,"Not Find")],-1),_=[n,c,r],u={__name:"[...all]",setup(l){return(d,i)=>(o(),t("div",a,_))}};export{u as default};
+//# sourceMappingURL=_...all_-qRBe-B9U.js.map
