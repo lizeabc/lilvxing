@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const route = useRoute();
+import {ref} from "vue";
+import axios from './axios';
 const imageModel = ref<HTMLImageElement>();
-
 useEventListener("click", async (e) => {
   const path = Array.from(e.composedPath());
   const first = path[0];
@@ -34,15 +34,42 @@ onKeyStroke("Escape", (e) => {
     e.preventDefault();
   }
 });
+let router =  ref(null)
+let loginOff = ref(false)
+loginOff = sessionStorage.getItem('loginOff')
+router = useRoute()
+const Btn=()=>{
+  axios.post('http://localhost:3666/register', {
+    username: 'example_user',
+    password: 'example_password',
+    email: 'example@example.com'
+  })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  // loginOff=true
+  // sessionStorage.setItem('loginOff',true)
+  // location.reload();
+}
 </script>
 
 <template>
-  <nav-bar />
-  <main class="w-full relative of-x-hidden">
-    <Header />
-    <router-view />
-    <Footer v-if="route.path != '/travel'" />
-  </main>
+  <div v-if="loginOff">
+    <nav-bar />
+    <main class="w-full relative of-x-hidden">
+      <Header />
+      <router-view />
+      <Footer v-if="router.path != '/travel'" />
+    </main>
+  </div>
+
+  <div v-if="!loginOff">
+    <div @click="Btn()">点击</div>
+  </div>
+
   <Transition name="fade">
     <div
       v-if="imageModel"
@@ -58,3 +85,11 @@ onKeyStroke("Escape", (e) => {
     </div>
   </Transition>
 </template>
+<style>
+  #DianJi{
+    display: none;
+  }
+  #w-full{
+    display: none;
+  }
+</style>

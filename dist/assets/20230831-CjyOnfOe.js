@@ -1,2 +1,0 @@
-import{c as e,o as s,a as t}from"./app-Bm1F-R0U.js";const o={class:"prose m-auto slide-enter-content"},n=t("p",null,"不知道为什么，我特别喜欢弄自己的博客，做了很多版本的博客",-1),_=t("p",null,"最早大学的时候做的纯html、css版本的，后面用hexo弄了一个，由于毕业之后找不到源码就没有再更新。",-1),c=t("p",null,"后面又做了terminal形式的，最近由于一直出去旅行又想做一个地图版本的。索性都重新整理一下，都集中到一个来。",-1),l=t("p",null,"以后就用这一个吧，要经常写博客哦，记录是件好事情，写下来才不容易忘记。",-1),a=t("p",null,"好吧好吧，一不小心就三点过了，弄完这最后一点睡觉了，明天再搞吧。",-1),r=[n,_,c,l,a],u={__name:"20230831",setup(i){return(p,d)=>(s(),e("div",o,r))}};export{u as default};
-//# sourceMappingURL=20230831-CjyOnfOe.js.map
